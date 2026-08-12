@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghibli Town Gramophone • Nostalgic YouTube Audio Jukebox</title>
+    <meta name="description" content="A soothing Studio Ghibli retro gramophone jukebox playing YouTube audio tracks in a cozy lo-fi atmosphere.">
+    
+    <!-- Google Fonts for Soothing Ghibli & 90s Aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- RemixIcon Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="ghibli-theme">
+    <!-- SOOTHING GHIBLI ANIMATED BACKGROUND LAYERS -->
+    <div class="ghibli-bg-layer"></div>
+    <div class="sky-twinkle-layer"></div>
+    <div class="ambient-warmth-overlay"></div>
+
+    <!-- FLOATING LIGHT MOTES & DANDELION PARTICLES -->
+    <div class="ghibli-particles" id="ghibliParticles"></div>
+
+    <div class="app-viewport">
+        <!-- TOP MINIMAL FLOATING HEADER -->
+        <header class="ghibli-header">
+            <div class="brand-badge">
+                <i class="ri-disc-line spin-icon"></i>
+                <div class="brand-title">
+                    <span class="brand-main">GHIBLI<span class="highlight">TONE</span></span>
+                    <span class="brand-sub">SOOTHING AUDIO JUKEBOX</span>
+                </div>
+            </div>
+
+            <!-- REVOLVING TOP LED MARQUEE TICKER -->
+            <div class="marquee-glass-container">
+                <div class="led-marquee-text" id="marqueeTicker">
+                    ✨ WELCOME TO THE COZY GHIBLI TOWN GRAMOPHONE • QUEUE UP YOUR FAVORITE YOUTUBE AUDIO TRACKS • SOOTHE YOUR MIND ✨
+                </div>
+            </div>
+
+            <!-- ONLINE USER COUNT BADGE -->
+            <div class="online-counter-badge" id="onlineCounterBadge" title="Live active listeners sharing this static session">
+                <span class="status-dot pulsing"></span>
+                <i class="ri-user-heart-fill"></i>
+                <div class="counter-info">
+                    <span class="counter-val" id="onlineUsersCount">1</span>
+                    <span class="counter-lbl">LISTENERS</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT: FLOATING SOOTHING GLASS PANELS -->
+        <main class="ghibli-main-grid">
+            
+            <!-- LEFT / CENTER: GRAMOPHONE AUDIO PLAYER GLASS POD -->
+            <section class="glass-player-pod">
+                <div class="pod-header">
+                    <div class="nixie-time-display" id="timeDisplay">00:00</div>
+                    <div class="pod-status-badge" id="playerStatusText">INITIALIZING...</div>
+                    <button class="toggle-crackle-btn" id="crackleToggleBtn" title="Toggle Vintage Vinyl Crackle">
+                        <i class="ri-radio-2-line"></i> CRACKLE: <span id="crackleStatus">ON</span>
+                    </button>
+                </div>
+
+                <!-- GRAMOPHONE STAGE -->
+                <div class="gramophone-stage">
+                    <!-- BRASS TRUMPET HORN & SOUND WAVES -->
+                    <div class="gramophone-horn-container">
+                        <svg class="brass-horn-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="hornGold" cx="30%" cy="30%" r="70%">
+                                    <stop offset="0%" stop-color="#FFF5B8" />
+                                    <stop offset="40%" stop-color="#E5A93B" />
+                                    <stop offset="85%" stop-color="#8B5704" />
+                                    <stop offset="100%" stop-color="#2B1800" />
+                                </radialGradient>
+                                <linearGradient id="stemBrass" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#F2D16B"/>
+                                    <stop offset="50%" stop-color="#AA7C11"/>
+                                    <stop offset="100%" stop-color="#442D00"/>
+                                </linearGradient>
+                            </defs>
+                            
+                            <path d="M 50 160 C 50 120, 80 90, 110 80" stroke="url(#stemBrass)" stroke-width="14" stroke-linecap="round"/>
+                            <ellipse cx="135" cy="65" rx="50" ry="38" fill="url(#hornGold)" stroke="#3A2200" stroke-width="3" transform="rotate(-25 135 65)" />
+                            <ellipse cx="138" cy="63" rx="34" ry="24" fill="#1C0E00" stroke="#8B5704" stroke-width="2" transform="rotate(-25 138 63)" />
+                            <ellipse cx="139" cy="62" rx="18" ry="12" fill="#000000" transform="rotate(-25 139 62)" />
+                        </svg>
+
+                        <!-- CONCENTRIC SOUNDWAVE PULSE RINGS -->
+                        <div class="sound-waves-emitter" id="soundWavesEmitter">
+                            <div class="wave-ring ring-1"></div>
+                            <div class="wave-ring ring-2"></div>
+                            <div class="wave-ring ring-3"></div>
+                            <div class="wave-ring ring-4"></div>
+                        </div>
+
+                        <div class="floating-notes-container" id="floatingNotes"></div>
+                    </div>
+
+                    <!-- TURNTABLE PLATTER & VINYL DISC -->
+                    <div class="turntable-base">
+                        <div class="platter-ring">
+                            <div class="vinyl-record" id="vinylRecord">
+                                <div class="vinyl-grooves"></div>
+                                <div class="vinyl-label" id="vinylLabel">
+                                    <div class="label-inner-ring"></div>
+                                    <div class="label-text" id="vinylLabelTitle">GHIBLI TONE</div>
+                                    <div class="center-spindle-hole"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TONEARM -->
+                        <div class="tonearm-assembly" id="tonearmAssembly">
+                            <div class="tonearm-pivot"><div class="pivot-cap"></div></div>
+                            <div class="tonearm-rod"></div>
+                            <div class="cartridge-head" id="cartridgeHead">
+                                <div class="needle-tip"></div>
+                                <div class="needle-glow" id="needleGlow"></div>
+                            </div>
+                        </div>
+
+                        <!-- ANALOG VU NEEDLES -->
+                        <div class="vu-meters-panel">
+                            <div class="vu-meter">
+                                <div class="vu-needle" id="vuNeedleL"></div>
+                            </div>
+                            <div class="vu-meter">
+                                <div class="vu-needle" id="vuNeedleR"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOW PLAYING TRACK & CONTINUOUS REVOLVING MESSAGE -->
+                <div class="now-playing-pod">
+                    <div class="track-badge">
+                        <i class="ri-disc-fill icon-pulse"></i>
+                        <span>SPINNING ON GHIBLI VINYL</span>
+                    </div>
+                    <h2 class="track-title" id="nowPlayingTitle">Press Power / Start to Play Melodies...</h2>
+                    
+                    <div class="track-meta">
+                        <span class="meta-item" id="nowPlayingSender">
+                            <i class="ri-user-heart-line"></i> Requested by: <strong>System</strong>
+                        </span>
+                    </div>
+
+                    <!-- CONTINUOUSLY REVOLVING DEDICATION MESSAGE BANNER -->
+                    <div class="revolving-message-box">
+                        <div class="revolving-badge"><i class="ri-heart-pulse-fill"></i> DEDICATION</div>
+                        <div class="revolving-marquee-container">
+                            <div class="revolving-marquee-text" id="revolvingMessageText">
+                                💌 "Enjoying peaceful Studio Ghibli lo-fi audio classics..."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEEK PROGRESS BAR -->
+                    <div class="progress-container">
+                        <span class="time-stamp" id="currentTimeText">0:00</span>
+                        <div class="progress-bar-bg" id="progressBarBg">
+                            <div class="progress-bar-fill" id="progressBarFill"></div>
+                        </div>
+                        <span class="time-stamp" id="totalTimeText">0:00</span>
+                    </div>
+                </div>
+
+                <!-- PLAYER CONTROL BUTTONS -->
+                <div class="player-controls-bar">
+                    <button class="glass-btn power-btn" id="powerBtn" title="Start / Stop Jukebox Audio">
+                        <i class="ri-power-flash-line"></i> POWER
+                    </button>
+                    
+                    <button class="glass-btn play-btn" id="playPauseBtn" title="Play / Pause Audio">
+                        <i class="ri-play-fill" id="playPauseIcon"></i>
+                    </button>
+
+                    <button class="glass-btn skip-btn" id="skipBtn" title="Skip to Next Track">
+                        <i class="ri-skip-forward-fill"></i> SKIP
+                    </button>
+
+                    <div class="volume-control-group">
+                        <i class="ri-volume-down-fill volume-icon" id="volumeIcon"></i>
+                        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="80">
+                        <span class="volume-num" id="volumeVal">80%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT: QUEUE & ADD AUDIO GLASS POD -->
+            <section class="glass-sidebar-pod">
+                <!-- ADD SONG FORM CONTAINER -->
+                <div class="request-form-card">
+                    <div class="card-header">
+                        <h3><i class="ri-add-line"></i> ADD YOUTUBE AUDIO</h3>
+                        <div class="queue-limit-badge" id="queueLimitBadge">
+                            <span id="queueCurrentCount">0</span> / 10 QUEUED
+                        </div>
+                    </div>
+
+                    <form id="requestForm" class="request-form">
+                        <div class="form-group">
+                            <label for="ytUrlInput"><i class="ri-youtube-fill"></i> YOUTUBE LINK / ID *</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="ytUrlInput" placeholder="https://www.youtube.com/watch?v=..." required>
+                                <button type="button" class="paste-btn" id="pasteBtn" title="Paste from clipboard">
+                                    <i class="ri-clipboard-line"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label for="senderInput"><i class="ri-user-line"></i> YOUR NAME</label>
+                                <input type="text" id="senderInput" placeholder="e.g. Kiki" maxlength="25">
+                            </div>
+                            <div class="form-group flex-2">
+                                <label for="messageInput"><i class="ri-chat-heart-line"></i> DEDICATION MESSAGE</label>
+                                <input type="text" id="messageInput" placeholder="e.g. Dedicated to cozy night study..." maxlength="80">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-queue-btn" id="submitQueueBtn">
+                            <i class="ri-disc-fill"></i> PLACE ON VINYL QUEUE
+                        </button>
+                    </form>
+
+                    <!-- TOAST NOTIFICATION BANNER -->
+                    <div class="toast-banner hidden" id="toastBanner">
+                        <i class="ri-alert-fill" id="toastIcon"></i>
+                        <span id="toastMessage">Queue is full (10/10). Please wait for songs to complete!</span>
+                    </div>
+                </div>
+
+                <!-- PLAYLIST QUEUE LIST (MAX 10) -->
+                <div class="playlist-queue-card">
+                    <div class="card-header">
+                        <h3><i class="ri-playlist-2-line"></i> UPCOMING PLAYLIST</h3>
+                        <span class="info-tag">MAX 10 TRACKS</span>
+                    </div>
+
+                    <div class="queue-capacity-bar">
+                        <div class="capacity-fill" id="capacityFill" style="width: 0%;"></div>
+                    </div>
+
+                    <div class="queue-list" id="queueListContainer">
+                        <!-- Dynamic Queue Items rendered here -->
+                        <div class="empty-queue-placeholder">
+                            <i class="ri-album-line"></i>
+                            <p>Queue is empty! Auto-adding Ghibli machine songs...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="ghibli-footer">
+            <p>GHIBLI TONE • COZY SOOTHING YOUTUBE AUDIO GRAMOPHONE • STATIC WEB APP</p>
+        </footer>
+    </div>
+
+    <!-- HIDDEN YOUTUBE IFRAME PLAYER -->
+    <div id="youtube-player-container" class="hidden-yt-container">
+        <div id="ytIframe"></div>
+    </div>
+
+    <!-- AUDIO FOR SYNTHESIZED VINYL CRACKLE -->
+    <audio id="crackleAudio" loop preload="auto" src="https://actions.google.com/sounds/v1/ambiences/vinyl_record_needle_crackle.ogg"></audio>
+
+    <!-- SCRIPTS -->
+    <script src="preset_songs.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="app.js"></script>
+</body>
+</html>
