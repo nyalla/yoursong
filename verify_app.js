@@ -18,7 +18,7 @@ console.log("✔ preset_songs.js loaded:", presetJs.length, "bytes");
 const requiredIds = [
     'vinylRecord', 'vinylLabelTitle', 'tonearmAssembly', 'needleGlow',
     'soundWavesEmitter', 'floatingNotes', 'timeDisplay', 'playerStatusText',
-    'vuNeedleL', 'vuNeedleR', 'crackleToggleBtn', 'crackleStatus', 'crackleAudio',
+    'vuNeedleL', 'vuNeedleR', 'crackleToggleBtn', 'crackleStatus',
     'nowPlayingTitle', 'nowPlayingSender', 'revolvingMessageText', 'currentTimeText',
     'totalTimeText', 'progressBarBg', 'progressBarFill', 'powerBtn', 'playPauseBtn',
     'playPauseIcon', 'skipBtn', 'volumeSlider', 'volumeVal', 'volumeIcon',

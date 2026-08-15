@@ -44,7 +44,7 @@
             </div>
 
             <!-- ONLINE USER COUNT BADGE -->
-            <div class="online-counter-badge" id="onlineCounterBadge" title="Live active listeners sharing this static session">
+            <div class="online-counter-badge" id="onlineCounterBadge" title="Simulated listener count for atmosphere">
                 <span class="status-dot pulsing"></span>
                 <i class="ri-user-heart-fill"></i>
                 <div class="counter-info">
@@ -59,80 +59,203 @@
             
             <!-- LEFT / CENTER: GRAMOPHONE AUDIO PLAYER GLASS POD -->
             <section class="glass-player-pod">
-                <div class="pod-header">
-                    <div class="nixie-time-display" id="timeDisplay">00:00</div>
-                    <div class="pod-status-badge" id="playerStatusText">INITIALIZING...</div>
-                    <button class="toggle-crackle-btn" id="crackleToggleBtn" title="Toggle Vintage Vinyl Crackle">
-                        <i class="ri-radio-2-line"></i> CRACKLE: <span id="crackleStatus">ON</span>
+                <!-- INTERFACE MODE SWITCHER BAR -->
+                <div class="interface-mode-switcher" id="interfaceModeSwitcher">
+                    <button class="mode-tab active" data-mode="vinyl" id="modeBtnVinyl" title="Switch to Vinyl Gramophone Interface">
+                        <i class="ri-disc-line"></i> VINYL GRAMOPHONE
+                    </button>
+                    <button class="mode-tab" data-mode="ipod" id="modeBtnIpod" title="Switch to Classic iPod Interface">
+                        <i class="ri-smartphone-line"></i> CLASSIC IPOD
+                    </button>
+                    <button class="mode-tab" data-mode="tape" id="modeBtnTape" title="Switch to Tape Recorder Interface">
+                        <i class="ri-cassette-line"></i> TAPE RECORDER
                     </button>
                 </div>
 
-                <!-- GRAMOPHONE STAGE -->
-                <div class="gramophone-stage">
-                    <!-- BRASS TRUMPET HORN & SOUND WAVES -->
-                    <div class="gramophone-horn-container">
-                        <svg class="brass-horn-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <radialGradient id="hornGold" cx="30%" cy="30%" r="70%">
-                                    <stop offset="0%" stop-color="#FFF5B8" />
-                                    <stop offset="40%" stop-color="#E5A93B" />
-                                    <stop offset="85%" stop-color="#8B5704" />
-                                    <stop offset="100%" stop-color="#2B1800" />
-                                </radialGradient>
-                                <linearGradient id="stemBrass" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#F2D16B"/>
-                                    <stop offset="50%" stop-color="#AA7C11"/>
-                                    <stop offset="100%" stop-color="#442D00"/>
-                                </linearGradient>
-                            </defs>
-                            
-                            <path d="M 50 160 C 50 120, 80 90, 110 80" stroke="url(#stemBrass)" stroke-width="14" stroke-linecap="round"/>
-                            <ellipse cx="135" cy="65" rx="50" ry="38" fill="url(#hornGold)" stroke="#3A2200" stroke-width="3" transform="rotate(-25 135 65)" />
-                            <ellipse cx="138" cy="63" rx="34" ry="24" fill="#1C0E00" stroke="#8B5704" stroke-width="2" transform="rotate(-25 138 63)" />
-                            <ellipse cx="139" cy="62" rx="18" ry="12" fill="#000000" transform="rotate(-25 139 62)" />
-                        </svg>
+                <div class="pod-header">
+                    <div class="nixie-time-display" id="timeDisplay">00:00</div>
+                    <div class="pod-status-badge" id="playerStatusText">INITIALIZING...</div>
+                    <button class="toggle-crackle-btn" id="crackleToggleBtn" title="Toggle Audio Crackle / Tape Hiss">
+                        <i class="ri-radio-2-line"></i> <span id="crackleLabelText">CRACKLE</span>: <span id="crackleStatus">ON</span>
+                    </button>
+                </div>
 
-                        <!-- CONCENTRIC SOUNDWAVE PULSE RINGS -->
-                        <div class="sound-waves-emitter" id="soundWavesEmitter">
-                            <div class="wave-ring ring-1"></div>
-                            <div class="wave-ring ring-2"></div>
-                            <div class="wave-ring ring-3"></div>
-                            <div class="wave-ring ring-4"></div>
+                <!-- STAGE 1: VINYL GRAMOPHONE -->
+                <div class="interface-stage vinyl-stage active" id="vinylStage">
+                    <div class="gramophone-stage">
+                        <!-- BRASS TRUMPET HORN & SOUND WAVES -->
+                        <div class="gramophone-horn-container">
+                            <svg class="brass-horn-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="hornGold" cx="30%" cy="30%" r="70%">
+                                        <stop offset="0%" stop-color="#FFF5B8" />
+                                        <stop offset="40%" stop-color="#E5A93B" />
+                                        <stop offset="85%" stop-color="#8B5704" />
+                                        <stop offset="100%" stop-color="#2B1800" />
+                                    </radialGradient>
+                                    <linearGradient id="stemBrass" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#F2D16B"/>
+                                        <stop offset="50%" stop-color="#AA7C11"/>
+                                        <stop offset="100%" stop-color="#442D00"/>
+                                    </linearGradient>
+                                </defs>
+                                
+                                <path d="M 50 160 C 50 120, 80 90, 110 80" stroke="url(#stemBrass)" stroke-width="14" stroke-linecap="round"/>
+                                <ellipse cx="135" cy="65" rx="50" ry="38" fill="url(#hornGold)" stroke="#3A2200" stroke-width="3" transform="rotate(-25 135 65)" />
+                                <ellipse cx="138" cy="63" rx="34" ry="24" fill="#1C0E00" stroke="#8B5704" stroke-width="2" transform="rotate(-25 138 63)" />
+                                <ellipse cx="139" cy="62" rx="18" ry="12" fill="#000000" transform="rotate(-25 139 62)" />
+                            </svg>
+
+                            <!-- CONCENTRIC SOUNDWAVE PULSE RINGS -->
+                            <div class="sound-waves-emitter" id="soundWavesEmitter">
+                                <div class="wave-ring ring-1"></div>
+                                <div class="wave-ring ring-2"></div>
+                                <div class="wave-ring ring-3"></div>
+                                <div class="wave-ring ring-4"></div>
+                            </div>
+
+                            <div class="floating-notes-container" id="floatingNotes"></div>
                         </div>
 
-                        <div class="floating-notes-container" id="floatingNotes"></div>
-                    </div>
+                        <!-- TURNTABLE PLATTER & VINYL DISC -->
+                        <div class="turntable-base">
+                            <div class="platter-ring">
+                                <div class="vinyl-record" id="vinylRecord">
+                                    <div class="vinyl-grooves"></div>
+                                    <div class="vinyl-label" id="vinylLabel">
+                                        <div class="label-inner-ring"></div>
+                                        <div class="label-text" id="vinylLabelTitle">GHIBLI TONE</div>
+                                        <div class="center-spindle-hole"></div>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <!-- TURNTABLE PLATTER & VINYL DISC -->
-                    <div class="turntable-base">
-                        <div class="platter-ring">
-                            <div class="vinyl-record" id="vinylRecord">
-                                <div class="vinyl-grooves"></div>
-                                <div class="vinyl-label" id="vinylLabel">
-                                    <div class="label-inner-ring"></div>
-                                    <div class="label-text" id="vinylLabelTitle">GHIBLI TONE</div>
-                                    <div class="center-spindle-hole"></div>
+                            <!-- TONEARM -->
+                            <div class="tonearm-assembly" id="tonearmAssembly">
+                                <div class="tonearm-pivot"><div class="pivot-cap"></div></div>
+                                <div class="tonearm-rod"></div>
+                                <div class="cartridge-head" id="cartridgeHead">
+                                    <div class="needle-tip"></div>
+                                    <div class="needle-glow" id="needleGlow"></div>
+                                </div>
+                            </div>
+
+                            <!-- ANALOG VU NEEDLES -->
+                            <div class="vu-meters-panel">
+                                <div class="vu-meter">
+                                    <div class="vu-needle" id="vuNeedleL"></div>
+                                </div>
+                                <div class="vu-meter">
+                                    <div class="vu-needle" id="vuNeedleR"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STAGE 2: CLASSIC IPOD INTERFACE -->
+                <div class="interface-stage ipod-stage" id="ipodStage">
+                    <div class="ipod-chassis">
+                        <div class="ipod-screen-bezel">
+                            <div class="ipod-lcd-screen">
+                                <div class="ipod-status-bar">
+                                    <span class="ipod-play-icon" id="ipodStatusIcon"><i class="ri-play-fill"></i></span>
+                                    <span class="ipod-header-title">Now Playing</span>
+                                    <span class="ipod-battery"><i class="ri-battery-2-charge-line"></i></span>
+                                </div>
+                                <div class="ipod-screen-body">
+                                    <div class="ipod-art-container">
+                                        <div class="ipod-vinyl-mini" id="ipodMiniVinyl">
+                                            <i class="ri-disc-fill"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ipod-track-details">
+                                        <div class="ipod-track-title" id="ipodTrackTitle">Press Play to Start</div>
+                                        <div class="ipod-artist-name" id="ipodArtistName">GhibliTone Jukebox</div>
+                                        <div class="ipod-album-name" id="ipodAlbumName">Cozy Retro Collection</div>
+                                        
+                                        <!-- ANIMATED EQUALIZER BARS -->
+                                        <div class="ipod-eq-visualizer" id="ipodEqBars">
+                                            <div class="eq-bar"></div>
+                                            <div class="eq-bar"></div>
+                                            <div class="eq-bar"></div>
+                                            <div class="eq-bar"></div>
+                                            <div class="eq-bar"></div>
+                                            <div class="eq-bar"></div>
+                                            <div class="eq-bar"></div>
+                                            <div class="eq-bar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ipod-progress-area">
+                                    <span class="ipod-time" id="ipodCurrentTime">0:00</span>
+                                    <div class="ipod-bar-bg" id="ipodBarBg">
+                                        <div class="ipod-bar-fill" id="ipodBarFill"></div>
+                                    </div>
+                                    <span class="ipod-time" id="ipodTotalTime">0:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ipod-clickwheel-container">
+                            <div class="ipod-clickwheel" id="ipodClickWheel">
+                                <button class="wheel-btn wheel-top" id="ipodBtnMenu" title="Menu / Crackle Toggle">MENU</button>
+                                <button class="wheel-btn wheel-left" id="ipodBtnPrev" title="Previous Track"><i class="ri-skip-back-fill"></i></button>
+                                <button class="wheel-btn wheel-right" id="ipodBtnNext" title="Next Track"><i class="ri-skip-forward-fill"></i></button>
+                                <button class="wheel-btn wheel-bottom" id="ipodBtnPlay" title="Play / Pause"><i class="ri-play-pause-fill"></i></button>
+                                <button class="wheel-center" id="ipodBtnCenter" title="Select / Toggle Play"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STAGE 3: OLD TAPE RECORDER INTERFACE -->
+                <div class="interface-stage tape-stage" id="tapeStage">
+                    <div class="tape-deck-container">
+                        <div class="tape-deck-header">
+                            <div class="tape-brand">
+                                <i class="ri-radio-2-fill"></i> GHIBLITONE STEREO CASSETTE C-90
+                            </div>
+                            <div class="tape-counter-box">
+                                <span class="counter-label">TAPE COUNTER</span>
+                                <div class="tape-counter-display" id="tapeCounterDisplay">
+                                    <span class="counter-digit" id="counterDigit1">0</span>
+                                    <span class="counter-digit" id="counterDigit2">0</span>
+                                    <span class="counter-digit" id="counterDigit3">0</span>
+                                </div>
+                                <button class="counter-reset-btn" id="tapeCounterReset" title="Reset Counter">RESET</button>
+                            </div>
+                        </div>
+
+                        <div class="tape-window-frame">
+                            <div class="tape-door">
+                                <div class="cassette-shell">
+                                    <div class="spool-housing">
+                                        <div class="tape-spool left-spool" id="tapeLeftSpool">
+                                            <div class="spool-center"></div>
+                                            <div class="spool-holes"></div>
+                                        </div>
+                                        <div class="tape-spool right-spool" id="tapeRightSpool">
+                                            <div class="spool-center"></div>
+                                            <div class="spool-holes"></div>
+                                        </div>
+                                    </div>
+                                    <div class="magnetic-tape-ribbon"></div>
+                                    <div class="tape-label-window">
+                                        <div class="cassette-label-title" id="tapeLabelTitle">GHIBLITONE COZY MIX</div>
+                                        <div class="cassette-label-sub" id="tapeLabelSub">SIDE A • CHROME TYPE II • LO-FI</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- TONEARM -->
-                        <div class="tonearm-assembly" id="tonearmAssembly">
-                            <div class="tonearm-pivot"><div class="pivot-cap"></div></div>
-                            <div class="tonearm-rod"></div>
-                            <div class="cartridge-head" id="cartridgeHead">
-                                <div class="needle-tip"></div>
-                                <div class="needle-glow" id="needleGlow"></div>
-                            </div>
-                        </div>
-
-                        <!-- ANALOG VU NEEDLES -->
-                        <div class="vu-meters-panel">
-                            <div class="vu-meter">
-                                <div class="vu-needle" id="vuNeedleL"></div>
-                            </div>
-                            <div class="vu-meter">
-                                <div class="vu-needle" id="vuNeedleR"></div>
+                        <div class="tape-controls-panel">
+                            <div class="piano-keys">
+                                <button class="piano-key key-rec" id="tapeKeyRec" title="Record Mode"><span class="rec-dot"></span>REC</button>
+                                <button class="piano-key key-rew" id="tapeKeyRew" title="Rewind"><i class="ri-rewind-fill"></i> REW</button>
+                                <button class="piano-key key-ff" id="tapeKeyFf" title="Fast Forward"><i class="ri-speed-fill"></i> FF</button>
+                                <button class="piano-key key-play" id="tapeKeyPlay" title="Play Tape"><i class="ri-play-fill"></i> PLAY</button>
+                                <button class="piano-key key-pause" id="tapeKeyPause" title="Pause Tape"><i class="ri-pause-fill"></i> PAUSE</button>
+                                <button class="piano-key key-stop" id="tapeKeyStop" title="Stop Tape"><i class="ri-stop-fill"></i> STOP</button>
                             </div>
                         </div>
                     </div>
@@ -201,7 +324,7 @@
                     <div class="card-header">
                         <h3><i class="ri-add-line"></i> ADD YOUTUBE AUDIO</h3>
                         <div class="queue-limit-badge" id="queueLimitBadge">
-                            <span id="queueCurrentCount">0</span> / 10 QUEUED
+                            <span id="queueCurrentCount">0</span> / 100 QUEUED
                         </div>
                     </div>
 
@@ -235,15 +358,15 @@
                     <!-- TOAST NOTIFICATION BANNER -->
                     <div class="toast-banner hidden" id="toastBanner">
                         <i class="ri-alert-fill" id="toastIcon"></i>
-                        <span id="toastMessage">Queue is full (10/10). Please wait for songs to complete!</span>
+                        <span id="toastMessage">Queue is full (100/100). Please wait for songs to complete!</span>
                     </div>
                 </div>
 
-                <!-- PLAYLIST QUEUE LIST (MAX 10) -->
+                <!-- PLAYLIST QUEUE LIST (MAX 100) -->
                 <div class="playlist-queue-card">
                     <div class="card-header">
                         <h3><i class="ri-playlist-2-line"></i> UPCOMING PLAYLIST</h3>
-                        <span class="info-tag">MAX 10 TRACKS</span>
+                        <span class="info-tag">MAX 100 TRACKS</span>
                     </div>
 
                     <div class="queue-capacity-bar">
@@ -271,8 +394,13 @@
         <div id="ytIframe"></div>
     </div>
 
-    <!-- AUDIO FOR SYNTHESIZED VINYL CRACKLE -->
-    <audio id="crackleAudio" loop preload="auto" src="https://actions.google.com/sounds/v1/ambiences/vinyl_record_needle_crackle.ogg"></audio>
+    <!-- AUDIO CONTEXT FOR PROCEDURAL CRACKLE (no external dependency) -->
+    <script>
+    window.crackleAudioCtx = null;
+    window.crackleGainNode = null;
+    window.crackleBuffer = null;
+    window.crackleSource = null;
+    </script>
 
     <!-- SCRIPTS -->
     <script src="preset_songs.js"></script>
